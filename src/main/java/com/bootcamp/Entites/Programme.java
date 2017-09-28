@@ -55,10 +55,10 @@ public class Programme implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     IndicateurPerformance indicateur_performance;
     
-    @OneToMany
+    @ManyToMany
     private ArrayList<Beneficiaire> beneficiaires;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tp_programme_bailleur", joinColumns = @JoinColumn(name = "programme_id"), inverseJoinColumns = @JoinColumn(name = "bailleur_id"))
     private ArrayList<Bailleur> bailleurs;
     

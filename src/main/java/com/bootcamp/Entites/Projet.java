@@ -59,7 +59,7 @@ public class Projet implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projet")
     private ArrayList<Livrable> livrables;
     
-    @ManyToOne
+    @ManyToMany
     private ArrayList<Bailleur> bailleurs ;
 
     @ManyToMany(cascade = CascadeType.ALL)

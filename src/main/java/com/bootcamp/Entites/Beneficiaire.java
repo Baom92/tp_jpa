@@ -60,4 +60,22 @@ public class Beneficiaire extends Personne {
     public void setProjetList(ArrayList<Projet> projet) {
         this.projet = projet;
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Beneficiaire)) {
+            return false;
+        }
+        Beneficiaire other = (Beneficiaire) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.bootcamp.Entites.Beneficiaire[ id=" + id + " ]";
+    }
 }
