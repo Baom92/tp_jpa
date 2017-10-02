@@ -6,7 +6,7 @@
 package com.bootcamp.Entites;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -30,26 +30,26 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class IndicateurPerformance implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final int serialVersionUID = 1;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable=false)
-    private Long id;
+    private int id;
     
     @NotNull(message="La valeur entrée ne doit pas être null. Entrez une valeur correcte")
     @Column(name = "nom", length=45, nullable=false)
     private String nom;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="indicateur_performance")
-    ArrayList<IndicateurQuantitatif> indic_quantitatif;
+    List<IndicateurQuantitatif> indic_quantitatif;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="indicateur_performance")
-    ArrayList<IndicateurQualitatif> indic_qualitatif;
+    List<IndicateurQualitatif> indic_qualitatif;
     
     public IndicateurPerformance() {
     }
     
-    public IndicateurPerformance(long id, String nom) {
+    public IndicateurPerformance(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
@@ -58,11 +58,11 @@ public class IndicateurPerformance implements Serializable {
         this.nom = nom;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -75,45 +75,20 @@ public class IndicateurPerformance implements Serializable {
     }
     
     @XmlTransient
-    public ArrayList<IndicateurQualitatif> getIndicateurQualitatifList() {
+    public List<IndicateurQualitatif> getIndicateurQualitatifList() {
         return indic_qualitatif;
     }
 
-    public void setIndicateurQualitatifList(ArrayList<IndicateurQualitatif> indic_qualitatif) {
+    public void setIndicateurQualitatifList(List<IndicateurQualitatif> indic_qualitatif) {
         this.indic_qualitatif = indic_qualitatif;
     }
     
     @XmlTransient
-    public ArrayList<IndicateurQuantitatif> getIndicateurQuantitatifList() {
+    public List<IndicateurQuantitatif> getIndicateurQuantitatifList() {
         return indic_quantitatif;
     }
 
-    public void setIndicateurQuantitatifList(ArrayList<IndicateurQuantitatif> indic_quantitatif) {
+    public void setIndicateurQuantitatifList(List<IndicateurQuantitatif> indic_quantitatif) {
         this.indic_quantitatif = indic_quantitatif;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IndicateurPerformance)) {
-            return false;
-        }
-        IndicateurPerformance other = (IndicateurPerformance) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.bootcamp.Entites.IndicateurPerformance[ id=" + id + " ]";
     }
 }

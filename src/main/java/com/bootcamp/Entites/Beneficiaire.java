@@ -5,12 +5,14 @@
  */
 package com.bootcamp.Entites;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -25,17 +27,23 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Beneficiaire extends Personne {
 
-    @ManyToMany(mappedBy = "beneficiaires")
-    private ArrayList<Programme> programme;
+//    @ManyToMany(mappedBy = "beneficiaires")
+//    private List<Programme> programmes;
     
-    @ManyToMany(mappedBy = "beneficiaires")
-    private ArrayList<Projet> projet;
+    @OneToMany(mappedBy = "beneficiaire" , cascade = CascadeType.ALL)
+    private List<Programme_has_Beneficiaire> programmes;
+    
+//    @ManyToMany(mappedBy = "beneficiaires")
+//    private List<Projet> projet;
+    
+    @OneToMany(mappedBy = "beneficiaire" , cascade = CascadeType.ALL)
+    private List<Beneficiaire_has_Projet> projets;
     
     public Beneficiaire() {
         super();
     }
     
-    public Beneficiaire(long id, String nom) {
+    public Beneficiaire(int id, String nom) {
         super(id, nom);
     }
     
@@ -44,38 +52,20 @@ public class Beneficiaire extends Personne {
     }
     
     @XmlTransient
-    public ArrayList<Programme> getProgrammeList() {
-        return programme;
+    public List<Programme_has_Beneficiaire> getProgrammeList() {
+        return programmes;
     }
 
-    public void setProgrammeList(ArrayList<Programme> programme) {
-        this.programme = programme;
+    public void setProgrammeList(List<Programme_has_Beneficiaire> programmes) {
+        this.programmes = programmes;
     }
     
     @XmlTransient
-    public ArrayList<Projet> getProjetList() {
-        return projet;
+    public List<Beneficiaire_has_Projet> getProjetList() {
+        return projets;
     }
 
-    public void setProjetList(ArrayList<Projet> projet) {
-        this.projet = projet;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Beneficiaire)) {
-            return false;
-        }
-        Beneficiaire other = (Beneficiaire) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.bootcamp.Entites.Beneficiaire[ id=" + id + " ]";
+    public void setProjetList(List<Beneficiaire_has_Projet> projet) {
+        this.projets = projet;
     }
 }

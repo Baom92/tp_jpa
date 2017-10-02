@@ -12,6 +12,12 @@
     <class>com.bootcamp.Entites.Programme</class>
     <class>com.bootcamp.Entites.Projet</class>
     <class>com.bootcamp.Entites.Personne</class>
+    <class>com.bootcamp.Entites.Bailleur_has_Programme</class>
+    <class>com.bootcamp.Entites.Bailleur_has_Projet</class>
+    <class>com.bootcamp.Entites.Beneficiaire_has_Projet</class>
+    <class>com.bootcamp.Entites.Programme_has_Beneficiaire</class>
+    <class>com.bootcamp.Entites.Programme_has_Fournisseur</class>
+    <class>com.bootcamp.Entites.Projet_has_Fournisseur</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_tp?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
@@ -20,7 +26,6 @@
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
-  
   <persistence-unit name="TP_JPA_PU_2" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.bootcamp.Entites.Bailleur</class>
@@ -33,12 +38,17 @@
     <class>com.bootcamp.Entites.Programme</class>
     <class>com.bootcamp.Entites.Projet</class>
     <class>com.bootcamp.Entites.Personne</class>
+    <class>com.bootcamp.Entites.Bailleur_has_Programme</class>
+    <class>com.bootcamp.Entites.Bailleur_has_Projet</class>
+    <class>com.bootcamp.Entites.Beneficiaire_has_Projet</class>
+    <class>com.bootcamp.Entites.Programme_has_Beneficiaire</class>
+    <class>com.bootcamp.Entites.Programme_has_Fournisseur</class>
+    <class>com.bootcamp.Entites.Projet_has_Fournisseur</class>
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby:target/jpa_tp2;create=true" />
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
-      <property name="eclipselink.ddl-generation.output-mode" value="database" />
-      
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:target/jpa_tp2;create=true"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_tp?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

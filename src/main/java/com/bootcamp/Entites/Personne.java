@@ -33,11 +33,11 @@ import javax.validation.constraints.NotNull;
 
 public class Personne implements Serializable {
 
-    protected static final long serialVersionUID = 1L;
+    protected static final int serialVersionUID = 1;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable=false)
-    protected Long id;
+    protected int id;
     
     @NotNull(message="La valeur entrée ne doit pas être null. Entrez une valeur correcte")
     @Column(name = "nom", length=45, nullable=false)
@@ -46,7 +46,7 @@ public class Personne implements Serializable {
     public Personne() {
     }
     
-    public Personne(long id, String nom) {
+    public Personne(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
@@ -55,11 +55,11 @@ public class Personne implements Serializable {
         this.nom = nom;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -69,23 +69,5 @@ public class Personne implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Personne)) {
-            return false;
-        }
-        Personne other = (Personne) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.bootcamp.Entites.Personne[ id=" + id + " ]";
     }
 }

@@ -6,7 +6,7 @@
 package com.bootcamp.Entites;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -35,11 +35,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Access(AccessType.FIELD)
 public class Projet implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final int serialVersionUID = 1;
     @Id
     @Column(name = "id", nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     
     @NotNull(message="La valeur entrée ne doit pas être null. Entrez une valeur correcte")
     @Column(name = "nom", length=45, nullable=false)
@@ -57,23 +57,32 @@ public class Projet implements Serializable {
     private Programme programme;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projet")
-    private ArrayList<Livrable> livrables;
+    private List<Livrable> livrables;
     
-    @ManyToMany
-    private ArrayList<Bailleur> bailleurs ;
+//    @ManyToMany
+//    private List<Bailleur> bailleurs ;
+    
+    @OneToMany(mappedBy = "projet" , cascade = CascadeType.ALL)
+    private List<Bailleur_has_Projet> bailleurs ;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "tp_projet_beneficiaire",joinColumns = @JoinColumn(name = "projet_id"),inverseJoinColumns = @JoinColumn(name = "beneficiaire_id"))
-    private ArrayList<Beneficiaire> beneficiaires;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "tp_projet_beneficiaire",joinColumns = @JoinColumn(name = "projet_id"),inverseJoinColumns = @JoinColumn(name = "beneficiaire_id"))
+//    private List<Beneficiaire> beneficiaires;
+    
+    @OneToMany(mappedBy = "projet" , cascade = CascadeType.ALL)
+    private List<Beneficiaire_has_Projet> beneficiaires ;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "tp_projet_fournisseur",joinColumns = @JoinColumn(name = "projet_id"),inverseJoinColumns = @JoinColumn(name = "fournisseur_id"))
-    private ArrayList<Fournisseur> fournisseurs;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "tp_projet_fournisseur",joinColumns = @JoinColumn(name = "projet_id"),inverseJoinColumns = @JoinColumn(name = "fournisseur_id"))
+//    private List<Fournisseur> fournisseurs;
+    
+    @OneToMany(mappedBy = "projet" , cascade = CascadeType.ALL)
+    private List<Projet_has_Fournisseur> fournisseurs ;
 
     public Projet() {
     }
     
-    public Projet(long id, String nom, String objectif) {
+    public Projet(int id, String nom, String objectif) {
         this.id = id;
         this.nom = nom;
         this.objectif = objectif;
@@ -84,11 +93,11 @@ public class Projet implements Serializable {
         this.objectif = objectif;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -125,54 +134,29 @@ public class Projet implements Serializable {
     }
     
     @XmlTransient
-    public ArrayList<Bailleur> getBailleurList() {
+    public List<Bailleur_has_Projet> getBailleurList() {
         return bailleurs;
     }
 
-    public void setBailleurList(ArrayList<Bailleur> bailleurs) {
+    public void setBailleurList(List<Bailleur_has_Projet> bailleurs) {
         this.bailleurs = bailleurs;
     }
     
     @XmlTransient
-    public ArrayList<Beneficiaire> getBeneficiaireList() {
+    public List<Beneficiaire_has_Projet> getBeneficiaireList() {
         return beneficiaires;
     }
 
-    public void setBeneficiaireList(ArrayList<Beneficiaire> beneficiaires) {
+    public void setBeneficiaireList(List<Beneficiaire_has_Projet> beneficiaires) {
         this.beneficiaires = beneficiaires;
     }
     
     @XmlTransient
-    public ArrayList<Fournisseur> getFournisseurList() {
+    public List<Projet_has_Fournisseur> getFournisseurList() {
         return fournisseurs;
     }
 
-    public void setFournisseurList(ArrayList<Fournisseur> fournisseurs) {
+    public void setFournisseurList(List<Projet_has_Fournisseur> fournisseurs) {
         this.fournisseurs = fournisseurs;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Projet)) {
-            return false;
-        }
-        Projet other = (Projet) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.bootcamp.Entites.Projet[ id=" + id + " ]";
     }
 }

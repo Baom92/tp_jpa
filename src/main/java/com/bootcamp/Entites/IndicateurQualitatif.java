@@ -28,11 +28,11 @@ import javax.validation.constraints.NotNull;
 
 public class IndicateurQualitatif implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final int serialVersionUID = 1;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable=false)
-    private Long id;
+    private int id;
     
     @NotNull(message="La valeur entrée ne doit pas être null. Entrez une valeur correcte")
     @Column(name = "nom", length=45, nullable=false)
@@ -53,7 +53,7 @@ public class IndicateurQualitatif implements Serializable {
     public IndicateurQualitatif() {
     }
     
-    public IndicateurQualitatif(long id, String nom, String propriete, String valeur) {
+    public IndicateurQualitatif(int id, String nom, String propriete, String valeur) {
         this.id = id;
         this.nom = nom;
         this.propriete = propriete;
@@ -66,11 +66,11 @@ public class IndicateurQualitatif implements Serializable {
         this.valeur = valeur;
     }
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -104,30 +104,5 @@ public class IndicateurQualitatif implements Serializable {
 
     public void setIndicateurPerformance(IndicateurPerformance indicateur_performance) {
         this.indicateur_performance = indicateur_performance;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof IndicateurQualitatif)) {
-            return false;
-        }
-        IndicateurQualitatif other = (IndicateurQualitatif) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.bootcamp.Entites.IndicateurQualitatif[ id=" + id + " ]";
     }
 }

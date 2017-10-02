@@ -13,7 +13,12 @@ import java.util.Properties;
 public class GenerateTableTest {
 
     @Test
-    public void generateTables(){
+    public void generateTablesMySQL(){
         Persistence.generateSchema("TP_JPA_PU", new Properties());
+    }
+    
+    @Test
+    public void generateTablesDerby(){
+        Persistence.generateSchema("TP_JPA_PU_2", new Properties());
     }
 }
